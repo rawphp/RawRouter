@@ -18,8 +18,8 @@
          verbose="false">
        
   <testsuites>
-    <testsuite name="RawPHP">
-        <directory suffix="Test.php">unit/includes/core/</directory>
+    <testsuite name="RawRouter">
+        <directory suffix="Test.php">unit/lib/</directory>
     </testsuite>
   </testsuites>
 
