@@ -33,7 +33,7 @@
 
 namespace RawRouter\Tests;
 
-use RawRouter\RawController;
+use RawPHP\RawRouter\RawController;
 
 /**
  * Test Home Controller.

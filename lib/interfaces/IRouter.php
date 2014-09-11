@@ -33,7 +33,7 @@
  * @link      http://rawphp.org/
  */
 
-namespace RawRouter;
+namespace RawPHP\RawRouter;
 
 /**
  * This interface should be implemented by the routing class to be used

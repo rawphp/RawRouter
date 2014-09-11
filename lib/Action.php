@@ -33,9 +33,9 @@
  * @link      http://rawphp.org/
  */
 
-namespace RawRouter;
+namespace RawPHP\RawRouter;
 
-use RawRouter\IAction;
+use RawPHP\RawRouter\IAction;
 use RawPHP\RawBase\Component;
 
 /**

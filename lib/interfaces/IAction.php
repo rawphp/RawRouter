@@ -33,7 +33,7 @@
  * @link      http://rawphp.org/
  */
 
-namespace RawRouter;
+namespace RawPHP\RawRouter;
 
 /**
  * This interface represents a controllers action as controller/action route.

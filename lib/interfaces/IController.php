@@ -33,7 +33,7 @@
  * @link      http://rawphp.org/
  */
 
-namespace RawRouter;
+namespace RawPHP\RawRouter;
 
 /**
  * The base controller interface.

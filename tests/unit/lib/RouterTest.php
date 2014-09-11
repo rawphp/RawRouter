@@ -33,9 +33,9 @@
  * @link      http://rawphp.org/
  */
 
-namespace RawRouter\Tests;
+namespace rawPHP\RawRouter\Tests;
 
-use RawRouter\Router;
+use RawPHP\RawRouter\Router;
 
 /**
  * The Router tests.

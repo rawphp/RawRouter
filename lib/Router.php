@@ -33,10 +33,10 @@
  * @link      http://rawphp.org/
  */
 
-namespace RawRouter;
+namespace RawPHP\RawRouter;
 
-use RawRouter\IRouter;
-use RawRouter\Action;
+use RawPHP\RawRouter\IRouter;
+use RawPHP\RawRouter\Action;
 use RawPHP\RawBase\Component;
 
 /**
