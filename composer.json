@@ -1,0 +1,27 @@
+{
+    "name": "rawphp/raw-router",
+    "type": "library",
+    "description": "RawRouter is a simple router used by RawPHP and other applications.",
+    "keywords": [ "routing" ],
+    "homepage": "http://rawphp.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Kaczocha",
+            "email": "tom@rawphp.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "phpunit/phpunit": "4.2.5"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "1.*",
+        "rawphp/raw-base": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "lib/"
+        ]
+    }
+}
