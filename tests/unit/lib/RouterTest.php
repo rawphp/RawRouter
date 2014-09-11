@@ -33,7 +33,7 @@
  * @link      http://rawphp.org/
  */
 
-namespace rawPHP\RawRouter\Tests;
+namespace RawPHP\RawRouter\Tests;
 
 use RawPHP\RawRouter\Router;
 
@@ -54,16 +54,25 @@ class RouterTest extends \PHPUnit_Framework_TestCase
      */
     protected $router;
     
+    /**
+     * Test setup.
+     */
     protected function setUp()
     {
         $this->router = new Router( 'home', 'index', 'RawRouter\\Tests\\' );
     }
     
+    /**
+     * Test cleanup.
+     */
     protected function tearDown()
     {
         $this->router = NULL;
     }
     
+    /**
+     * Test creating a default controller and action.
+     */
     public function testCreateDefaultControllerAndAction()
     {
         $route = '';
@@ -74,6 +83,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->_testCreateController( $controller );
     }
     
+    /**
+     * Test creating a home controller with default action.
+     */
     public function testCreateHomeControllerWithDefaultAction( )
     {
         $route = 'home';
@@ -84,6 +96,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->_testCreateController( $controller );
     }
     
+    /**
+     * Test creating a home controller with about action.
+     */
     public function testCreateHomeControllerWithAboutAction( )
     {
         $route = 'home/about';
@@ -94,6 +109,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->_testCreateController( $controller, 'aboutAction' );
     }
     
+    /**
+     * Test creating a controller with invalid action.
+     */
     public function testCreateControllerWithInvalidAction( )
     {
         $route = 'home/non_existent_action';
@@ -104,6 +122,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->_testCreateController( $controller, 'indexAction' );
     }
     
+    /**
+     * Test creating a controller with page id parameter
+     */
     public function testCreateControllerWithPageId( )
     {
         $route = 'home/pages';
@@ -111,13 +132,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         
         $controller = $this->router->createController( $route, $params );
         
-        $this->_testCreateController( $controller,'pagesAction' );
+        $this->_testCreateController( $controller, 'pagesAction' );
         
         $this->assertTrue( $controller->action->hasParams( ) );
         
-        $set_params = $controller->action->getParams( );
+        $setParams = $controller->action->getParams( );
         
-        $this->assertEquals( 1, $set_params[ 0 ] );
+        $this->assertEquals( 1, $setParams[ 0 ] );
     }
     
     /**

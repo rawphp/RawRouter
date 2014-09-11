@@ -23,6 +23,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * 
+ * PHP version 5.4
+ * 
  * @category  PHP
  * @package   RawPHP/RawRouter/Tests
  * @author    Tom Kaczohca <tom@rawphp.org>
@@ -31,14 +33,19 @@
  * @link      http://rawphp.org/
  */
 
-namespace RawRouter\Tests;
+namespace RawPHP\RawRouter\Tests;
 
 use RawPHP\RawRouter\RawController;
 
 /**
  * Test Home Controller.
  * 
- * 
+ * @category  PHP
+ * @package   RawPHP/RawRouter/Tests
+ * @author    Tom Kaczohca <tom@rawphp.org>
+ * @copyright 2014 Tom Kaczocha
+ * @license   http://rawphp.org/license.txt MIT
+ * @link      http://rawphp.org/
  */
 class HomeController extends RawController
 {
