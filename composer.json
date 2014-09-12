@@ -23,5 +23,8 @@
         "classmap": [
             "lib/"
         ]
+    },
+    "suggest": {
+        "rawphp/raw-request": "RawRouter makes it easier in creating urls and routes for the router."
     }
 }
