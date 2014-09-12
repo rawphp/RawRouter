@@ -51,30 +51,61 @@ use RawPHP\RawBase\Component;
  */
 class Router extends Component implements IRouter
 {
-    public $defaultController   = NULL;
-    public $defaultAction       = NULL;
-    public $namespace           = NULL;
+    public $defaultController   = 'home';
+    public $defaultAction       = 'index';
+    public $namespace           = '';
     
     /**
      * Router Constructor.
      * 
-     * @param string $controller default controller name
-     * @param string $action     default action name
-     * @param string $namespace  namespace (if used)
+     * @param array $config configuration array
      */
-    public function __construct( $controller = 'home', $action = 'index', $namespace = '' )
+    public function __construct( $config = array( ) )
     {
-        parent::__construct( );
+        parent::__construct( $config );
         
-        $this->defaultController = $controller;
-        $this->defaultAction     = $action;
-        $this->namespace         = $namespace;
+        $this->init( $config );
+    }
+    
+    /**
+     * Initialises the router.
+     * 
+     * @param array $config configuration array
+     */
+    public function init( $config )
+    {
+        if ( NULL !== $config  && is_array( $config ) )
+        {
+            foreach( $config as $key => $value )
+            {
+                switch( $key )
+                {
+                    case 'default_controller':
+                        $this->defaultController = $value;
+                        break;
+                    
+                    case 'default_action':
+                        $this->defaultAction = $value;
+                        break;
+                    
+                    case 'namespace':
+                        $this->namespace = $value;
+                        break;
+                    
+                    default:
+                        // do nothing
+                        break;
+                }
+            }
+        }
     }
     
     /**
      * Creates a controller and its associated action.
      * 
      * @param string $route  the controller/action string
+     *                       format [controllerName/actionName]
+     * 
      * @param array  $params list of parameters
      * 
      * @return RawController instance of a controller
@@ -86,7 +117,7 @@ class Router extends Component implements IRouter
         $route = rtrim( $route, '/' );
         
         $vars = explode( '/', $route );
-        
+        echo 'Namespace: "' . $this->namespace . '"';
         if ( 1 === count( $vars ) && '' == $vars[ 0 ] )
         {
             $controller = $this->_buildControllerName( $this->defaultController . 'Controller' );
@@ -153,11 +184,7 @@ class Router extends Component implements IRouter
         {
             $controller = $this->_buildControllerName( $this->defaultController . 'Controller' );
         
-            $action = new Action( 
-                    'action' 
-                    . strtoupper( $this->defaultAction[ 0 ] ) 
-                    . substr( $this->defaultAction, 1 ) 
-            );
+            $action = new Action( $this->defaultAction . 'Action' );
             
             $controller = new $controller( $action );
         }

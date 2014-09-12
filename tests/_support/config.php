@@ -23,18 +23,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * 
+ * PHP version 5.4
+ * 
  * @category  PHP
- * @package   RawPHP/RawRouter
+ * @package   RawPHP/RawSession
  * @author    Tom Kaczohca <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-defined( 'DS' )             || define( 'DS', DIRECTORY_SEPARATOR );
-defined( 'SUPPORT_DIR' )    || define( 'SUPPORT_DIR', dirname( __FILE__ ) . DS . '_support' . DS );
+$config = array();
 
-require_once dirname( dirname( __FILE__ ) ) . DS . 'vendor' . DS . 'autoload.php';
-require_once SUPPORT_DIR . 'HomeController.php';
+/*******************************************************************************
+ * Router
+ * -----------------------------------------------------------------------------
+ * These are the router settings.
+ * 
+ ******************************************************************************/
+$config[ 'default_controller' ] = 'home';
+$config[ 'default_action' ]     = 'index';
+$config[ 'namespace' ]          = 'RawPHP\\RawRouter\\Tests\\';
 
-echo PHP_EOL . PHP_EOL . '************* BOOTSTRAP ********************' . PHP_EOL . PHP_EOL;
+return $config;
