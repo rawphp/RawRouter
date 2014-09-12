@@ -54,8 +54,14 @@ class RouterTest extends \PHPUnit_Framework_TestCase
      */
     protected $router;
     
+    /**
+     * @var array
+     */
     protected static $config;
     
+    /**
+     * Setup done before test suite run.
+     */
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
