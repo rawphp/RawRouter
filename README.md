@@ -65,4 +65,8 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 
 ## Changelog
 
+### 12-09-2014
+- Changed router constructor to take a configuration array rather than individual parameters.
+
+### 11-09-2014
 - Initial Code Commit
