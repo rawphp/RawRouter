@@ -1,9 +1,10 @@
 
 # RawRouter - A Simple Routing Service for MVC PHP Applications
 
-## Class Features
+## Package Features
 
-- 
+- Simple to use router
+- MVC style routing
 
 ## Installation
 
@@ -45,6 +46,9 @@ $config = array(
 
 // get new router instance
 $router = new Router( $config );
+
+// example request
+// http://example.com/users/get/1
 
 $route = 'users/get';                                           // the route must be in one of the following formats [ controller, controller/action, controller/action/param/param/... ]
 $params = array( 1 );                                           // array of values to be passed to the action method in the correct order
