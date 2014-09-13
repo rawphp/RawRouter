@@ -48,6 +48,13 @@ namespace RawPHP\RawRouter;
 interface IController
 {
     /**
+     * Initialises the controller.
+     * 
+     * @param IAction $action the action instance
+     */
+    public function init( IAction $action );
+    
+    /**
      * Runs the controller action.
      */
     public function run( );

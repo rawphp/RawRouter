@@ -49,20 +49,22 @@ use RawPHP\RawBase\Component;
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-abstract class RawController extends Component implements IController
+abstract class Controller extends Component implements IController
 {
     public $action;
     
     /**
-     * Constructs a new controller.
+     * Initialises the controller.
      * 
-     * @param Action $action the controller action instance
+     * @param IAction $action the action instance
+     * 
+     * @action ON_INIT_ACTION
      */
-    public function __construct( $action )
+    public function init( IAction $action )
     {
-        parent::__construct();
-        
         $this->action = $action;
+        
+        $this->doAction( self::ON_INIT_ACTION );
     }
     
     /**
@@ -74,9 +76,14 @@ abstract class RawController extends Component implements IController
     
     /**
      * Runs the controller action.
+     * 
+     * @action ON_BEFORE_CONTROLLER_RUN
+     * @action ON_AFTER_CONTROLLER_RUN
      */
     public function run( )
     {
+        $this->doAction( self::ON_BEFORE_CONTROLLER_RUN );
+        
         $action = $this->action->getName( );
         
         if ( $this->action->hasParams( ) )
@@ -91,16 +98,30 @@ abstract class RawController extends Component implements IController
         {
             $this->$action( );
         }
+        
+        $this->doAction( self::ON_AFTER_CONTROLLER_RUN );
     }
     
     /**
      * Redirects the browser to new location.
      * 
      * @param string $url the redirection url
+     * 
+     * @filter ON_REDIRECT_LOCATION_FILTER
      */
     public function redirect( $url )
     {
-        header( 'Location: ' . $url );
+        $location = $this->filter( self::ON_REDIRECT_LOCATION_FILTER, $url );
+        
+        header( 'Location: ' . $location );
         exit();
     }
+    
+    // actions
+    const ON_INIT_ACTION                = 'on_init_action';
+    const ON_BEFORE_CONTROLLER_RUN      = 'on_before_controller_run';
+    const ON_AFTER_CONTROLLER_RUN       = 'on_after_controller_run';
+    
+    // filters
+    const ON_REDIRECT_LOCATION_FILTER   = 'on_redirect_filter';
 }

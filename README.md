@@ -72,6 +72,10 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 
 ## Changelog
 
+#### 14-09-2014
+- Implemented the hook system.
+- Renamed RawController -> Controller.
+
 #### 12-09-2014
 - Changed router constructor to take a configuration array rather than individual parameters.
 

@@ -60,10 +60,13 @@ class Router extends Component implements IRouter
      * 
      * @param array $config configuration array
      * 
-     * @action ON_ROUTER_INIT_ACTION
+     * @action ON_BEFORE_ROUTER_INIT
+     * @action ON_AFTER_ROUTER_INIT
      */
     public function init( $config )
     {
+        $this->doAction( self::ON_BEFORE_ROUTER_INIT );
+        
         if ( NULL !== $config  && is_array( $config ) )
         {
             foreach( $config as $key => $value )
@@ -89,7 +92,7 @@ class Router extends Component implements IRouter
             }
         }
         
-        $this->doAction( self::ON_ROUTER_INIT_ACTION );
+        $this->doAction( self::ON_AFTER_ROUTER_INIT );
     }
     
     /**
@@ -100,9 +103,9 @@ class Router extends Component implements IRouter
      * 
      * @param array  $params list of parameters
      * 
-     * @filter ON_ROUTER_CREATE_CONTROLLER_FILTER
+     * @filter ON_CREATE_CONTROLLER_FILTER
      * 
-     * @return RawController instance of a controller
+     * @return Controller instance of a controller
      */
     public function createController( $route, $params )
     {
@@ -183,7 +186,7 @@ class Router extends Component implements IRouter
             $controller = new $controller( $action );
         }
         
-        return $this->filter( self::ON_ROUTER_CREATE_CONTROLLER_FILTER, $controller, $route, $params );
+        return $this->filter( self::ON_CREATE_CONTROLLER_FILTER, $controller, $route, $params );
     }
     
     /**
@@ -230,7 +233,8 @@ class Router extends Component implements IRouter
         return $actionName;
     }
     
-    const ON_ROUTER_INIT_ACTION = 'on_router_init_action';
+    const ON_BEFORE_ROUTER_INIT         = 'on_before_router_init';
+    const ON_AFTER_ROUTER_INIT          = 'on_after_router_init';
     
-    const ON_ROUTER_CREATE_CONTROLLER_FILTER = 'on_router_create_controller_filter';
+    const ON_CREATE_CONTROLLER_FILTER   = 'on_create_controller_filter';
 }

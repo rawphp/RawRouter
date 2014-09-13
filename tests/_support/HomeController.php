@@ -35,7 +35,7 @@
 
 namespace RawPHP\RawRouter\Tests;
 
-use RawPHP\RawRouter\RawController;
+use RawPHP\RawRouter\Controller;
 
 /**
  * Test Home Controller.
@@ -47,7 +47,7 @@ use RawPHP\RawRouter\RawController;
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-class HomeController extends RawController
+class HomeController extends Controller
 {
     /**
      * Default action: index

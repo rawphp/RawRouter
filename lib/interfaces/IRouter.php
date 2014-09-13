@@ -49,6 +49,15 @@ namespace RawPHP\RawRouter;
 interface IRouter
 {
     /**
+     * Initialises the router.
+     * 
+     * @param array $config configuration array
+     * 
+     * @action ON_ROUTER_INIT_ACTION
+     */
+    public function init( $config );
+    
+    /**
      * Creates a controller and its associated action.
      * 
      * @param string $route  the controller/action string
