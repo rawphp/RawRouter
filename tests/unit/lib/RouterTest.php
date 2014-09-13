@@ -60,21 +60,14 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     protected static $config;
     
     /**
-     * Setup done before test suite run.
-     */
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-        
-        self::$config = include_once SUPPORT_DIR . 'config.php';
-    }
-    
-    /**
      * Test setup.
      */
     protected function setUp()
     {
-        $this->router = new Router( self::$config );
+        global $config;
+        
+        $this->router = new Router( );
+        $this->router->init( $config );
     }
     
     /**

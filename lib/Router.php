@@ -56,21 +56,11 @@ class Router extends Component implements IRouter
     public $namespace           = '';
     
     /**
-     * Router Constructor.
-     * 
-     * @param array $config configuration array
-     */
-    public function __construct( $config = array( ) )
-    {
-        parent::__construct( $config );
-        
-        $this->init( $config );
-    }
-    
-    /**
      * Initialises the router.
      * 
      * @param array $config configuration array
+     * 
+     * @action ON_ROUTER_INIT_ACTION
      */
     public function init( $config )
     {
@@ -98,6 +88,8 @@ class Router extends Component implements IRouter
                 }
             }
         }
+        
+        $this->doAction( self::ON_ROUTER_INIT_ACTION );
     }
     
     /**
@@ -107,6 +99,8 @@ class Router extends Component implements IRouter
      *                       format [controllerName/actionName]
      * 
      * @param array  $params list of parameters
+     * 
+     * @filter ON_ROUTER_CREATE_CONTROLLER_FILTER
      * 
      * @return RawController instance of a controller
      */
@@ -189,7 +183,7 @@ class Router extends Component implements IRouter
             $controller = new $controller( $action );
         }
         
-        return $controller;
+        return $this->filter( self::ON_ROUTER_CREATE_CONTROLLER_FILTER, $controller, $route, $params );
     }
     
     /**
@@ -235,4 +229,8 @@ class Router extends Component implements IRouter
         
         return $actionName;
     }
+    
+    const ON_ROUTER_INIT_ACTION = 'on_router_init_action';
+    
+    const ON_ROUTER_CREATE_CONTROLLER_FILTER = 'on_router_create_controller_filter';
 }

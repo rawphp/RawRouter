@@ -45,7 +45,10 @@ $config = array(
 );
 
 // get new router instance
-$router = new Router( $config );
+$router = new Router( );
+
+// initialise router
+$router->init( $config );
 
 // example request
 // http://example.com/users/get/1
