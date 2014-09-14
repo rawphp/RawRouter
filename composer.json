@@ -1,7 +1,7 @@
 {
     "name": "rawphp/raw-router",
     "type": "library",
-    "description": "RawRouter is a simple router used by RawPHP and other applications.",
+    "description": "RawRouter is a simple router used by RawPHP framework and other applications.",
     "keywords": [ "routing" ],
     "homepage": "http://rawphp.org",
     "license": "MIT",
