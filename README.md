@@ -73,6 +73,9 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 
 ## Changelog
 
+#### 15-09-2014
+- Updated Controller to work with the new RawBase.
+
 #### 14-09-2014
 - Implemented the hook system.
 - Renamed RawController -> Controller.
