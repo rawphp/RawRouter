@@ -60,7 +60,7 @@ abstract class Controller extends Component implements IController
      * 
      * @action ON_INIT_ACTION
      */
-    public function init( IAction $action )
+    public function init( $action )
     {
         $this->action = $action;
         

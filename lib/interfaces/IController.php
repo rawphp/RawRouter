@@ -52,7 +52,7 @@ interface IController
      * 
      * @param IAction $action the action instance
      */
-    public function init( IAction $action );
+    public function init( $action );
     
     /**
      * Runs the controller action.

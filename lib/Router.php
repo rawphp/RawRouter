@@ -109,82 +109,71 @@ class Router extends Component implements IRouter
      */
     public function createController( $route, $params )
     {
-        $controller = NULL;
+        $control = NULL;
         $route = ltrim( $route, '/' );
         $route = rtrim( $route, '/' );
         
         $vars = explode( '/', $route );
-        echo 'Namespace: "' . $this->namespace . '"';
+        
         if ( 1 === count( $vars ) && '' == $vars[ 0 ] )
         {
-            $controller = $this->_buildControllerName( $this->defaultController . 'Controller' );
+            $control = $this->_buildControllerName( $this->defaultController . 'Controller' );
             
             // build action
-            $aName = $this->_buildActionName( $controller, $this->defaultAction );
+            $aName = $this->_buildActionName( $control, $this->defaultAction );
             
-            $action = new Action( $aName, $params );
-            
-            $controller = $this->namespace . $controller;
-            
-            $controller = new $controller( $action );
+            $control = $this->namespace . $control;
         }
         else if ( 1 === count( $vars ) )
         {
             // controller /
             
-            $controller = $this->_buildControllerName( $vars[ 0 ] . 'Controller' );
+            $control = $this->_buildControllerName( $vars[ 0 ] . 'Controller' );
             
             array_shift( $vars );
             
             // build action
-            $aName = $this->_buildActionName( $controller, $this->defaultAction );
-            $action = new Action( $aName, $params );
+            $aName = $this->_buildActionName( $control, $this->defaultAction );
             
-            $controller = $this->namespace . $controller;
-            
-            $controller = new $controller( $action );
+            $control = $this->namespace . $control;
         }
         else if ( 2 === count( $vars ) )
         {
             // controller / action
-            $controller = $this->_buildControllerName( $vars[ 0 ] . 'Controller' );
+            $control = $this->_buildControllerName( $vars[ 0 ] . 'Controller' );
             
             array_shift( $vars );
             
             // build action
-            $aName = $this->_buildActionName( $controller, $vars[ 0 ] );
-            $action = new Action( $aName, $params );
+            $aName = $this->_buildActionName( $control, $vars[ 0 ] );
             
-            $controller = $this->namespace . $controller;
-            
-            $controller = new $controller( $action );
+            $control = $this->namespace . $control;
         }
         else if ( 2 < count( $vars ) )
         {
             // controller / action / params
-            $controller = $this->_buildControllerName( $vars[ 0 ] . 'Controller' );
+            $control = $this->_buildControllerName( $vars[ 0 ] . 'Controller' );
             
             array_shift( $vars );
             
             // build action
-            $aName = $this->_buildActionName( $controller, $vars[ 0 ] );
+            $aName = $this->_buildActionName( $control, $vars[ 0 ] );
             
             array_shift( $vars );
             
-            $action = new Action( $aName, $params );
-            
-            $controller = $this->namespace . $controller;
-            
-            $controller = new $controller( $action );
+            $control = $this->namespace . $control;
         }
         else
         {
-            $controller = $this->_buildControllerName( $this->defaultController . 'Controller' );
+            $control = $this->_buildControllerName( $this->defaultController . 'Controller' );
         
-            $action = new Action( $this->defaultAction . 'Action' );
-            
-            $controller = new $controller( $action );
+            $aName = $this->defaultAction . 'Action';
         }
+        
+        $action = new Action( $aName, $params );
+        
+        $controller = new $control( );
+        $controller->init( $action );
         
         return $this->filter( self::ON_CREATE_CONTROLLER_FILTER, $controller, $route, $params );
     }

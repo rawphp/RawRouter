@@ -11,12 +11,12 @@
 ### Composer
 RawRouter is available via [Composer/Packagist](https://packagist.org/packages/rawphp/raw-router).
 
-Add `"rawphp/raw-router": "0.1.1"` to the require block in your composer.json and then run `composer install`.
+Add `"rawphp/raw-router": "0.*@dev"` to the require block in your composer.json and then run `composer install`.
 
 ```json
 {
         "require": {
-            "rawphp/raw-router": "0.1.1"
+            "rawphp/raw-router": "0.*@dev"
         }
 }
 ```
@@ -24,7 +24,7 @@ Add `"rawphp/raw-router": "0.1.1"` to the require block in your composer.json an
 You can also simply run the following from the command line:
 
 ```sh
-composer require rawphp/raw-router "0.1.1"
+composer require rawphp/raw-router "0.*@dev"
 ```
 
 ### Tarball
