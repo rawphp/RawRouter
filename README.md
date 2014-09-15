@@ -1,5 +1,6 @@
-
 # RawRouter - A Simple Routing Service for MVC PHP Applications
+
+[![Build Status](https://travis-ci.org/rawphp/RawRouter.svg?branch=master)](https://travis-ci.org/rawphp/RawRouter)
 
 ## Package Features
 
