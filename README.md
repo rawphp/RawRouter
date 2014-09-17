@@ -1,9 +1,8 @@
-# RawRouter - A Simple Routing Service for MVC PHP Applications
+# RawRouter - A Simple Routing Service for MVC PHP Applications [![Build Status](https://travis-ci.org/rawphp/RawRouter.svg?branch=master)](https://travis-ci.org/rawphp/RawRouter)
 
-[![Build Status](https://travis-ci.org/rawphp/RawRouter.svg?branch=master)](https://travis-ci.org/rawphp/RawRouter)
+[![Latest Stable Version](https://poser.pugx.org/rawphp/raw-router/v/stable.svg)](https://packagist.org/packages/rawphp/raw-router) [![Total Downloads](https://poser.pugx.org/rawphp/raw-router/downloads.svg)](https://packagist.org/packages/rawphp/raw-router) [![Latest Unstable Version](https://poser.pugx.org/rawphp/raw-router/v/unstable.svg)](https://packagist.org/packages/rawphp/raw-router) [![License](https://poser.pugx.org/rawphp/raw-router/license.svg)](https://packagist.org/packages/rawphp/raw-router)
 
 ## Package Features
-
 - Simple to use router
 - MVC style routing
 
@@ -73,8 +72,8 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 
 ## Changelog
 
-#### 15-09-2014
-- Updated Controller to work with the new RawBase.
+#### 17-09-2014
+- Updated to work with the latest rawphp/rawbase package.
 
 #### 14-09-2014
 - Implemented the hook system.

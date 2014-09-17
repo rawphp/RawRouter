@@ -62,6 +62,8 @@ abstract class Controller extends Component implements IController
      */
     public function init( $action )
     {
+        parent::init( $action );
+        
         $this->action = $action;
         
         $this->doAction( self::ON_INIT_ACTION );

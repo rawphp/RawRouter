@@ -73,6 +73,8 @@ class Action extends Component implements IAction
      */
     private function _init( $params )
     {
+        parent::init( $params );
+        
         if ( NULL !== $params && 0 < count( $params ) )
         {
             foreach( $params as $key => $value )

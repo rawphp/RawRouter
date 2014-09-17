@@ -63,8 +63,10 @@ class Router extends Component implements IRouter
      * @action ON_BEFORE_ROUTER_INIT
      * @action ON_AFTER_ROUTER_INIT
      */
-    public function init( $config )
+    public function init( $config = NULL )
     {
+        parent::init( $config );
+        
         $this->doAction( self::ON_BEFORE_ROUTER_INIT );
         
         if ( NULL !== $config  && is_array( $config ) )
