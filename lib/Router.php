@@ -175,7 +175,7 @@ class Router extends Component implements IRouter
         $action = new Action( $aName, $params );
         
         $controller = new $control( );
-        $controller->init( $action );
+        $controller->setAction( $action );
         
         return $this->filter( self::ON_CREATE_CONTROLLER_FILTER, $controller, $route, $params );
     }

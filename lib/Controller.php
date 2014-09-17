@@ -37,6 +37,7 @@ namespace RawPHP\RawRouter;
 
 use RawPHP\RawRouter\IController;
 use RawPHP\RawBase\Component;
+use RawPHP\RawRouter\IAction;
 
 /**
  * Base controller class which all other controllers in the application
@@ -51,22 +52,25 @@ use RawPHP\RawBase\Component;
  */
 abstract class Controller extends Component implements IController
 {
+    /**
+     * @var IAction
+     */
     public $action;
     
     /**
-     * Initialises the controller.
+     * Sets the controller action.
      * 
      * @param IAction $action the action instance
      * 
+     * @filter ON_INIT_ACTION_FILTER(1)
+     * 
      * @action ON_INIT_ACTION
      */
-    public function init( $action )
+    public function setAction( IAction $action )
     {
-        parent::init( $action );
+        $this->action = $this->filter( self::ON_INIT_ACTION_FILTER, $action );
         
-        $this->action = $action;
-        
-        $this->doAction( self::ON_INIT_ACTION );
+        $this->doAction( self::ON_INIT_ACTION_ACTION );
     }
     
     /**
@@ -79,12 +83,12 @@ abstract class Controller extends Component implements IController
     /**
      * Runs the controller action.
      * 
-     * @action ON_BEFORE_CONTROLLER_RUN
-     * @action ON_AFTER_CONTROLLER_RUN
+     * @action ON_BEFORE_CONTROLLER_RUN_ACTION
+     * @action ON_AFTER_CONTROLLER_RUN_ACTION
      */
     public function run( )
     {
-        $this->doAction( self::ON_BEFORE_CONTROLLER_RUN );
+        $this->doAction( self::ON_BEFORE_CONTROLLER_RUN_ACTION );
         
         $action = $this->action->getName( );
         
@@ -101,7 +105,7 @@ abstract class Controller extends Component implements IController
             $this->$action( );
         }
         
-        $this->doAction( self::ON_AFTER_CONTROLLER_RUN );
+        $this->doAction( self::ON_AFTER_CONTROLLER_RUN_ACTION );
     }
     
     /**
@@ -109,10 +113,14 @@ abstract class Controller extends Component implements IController
      * 
      * @param string $url the redirection url
      * 
-     * @filter ON_REDIRECT_LOCATION_FILTER
+     * @action ON_BEFORE_REDIRECT_ACTION
+     * 
+     * @filter ON_REDIRECT_LOCATION_FILTER(1)
      */
     public function redirect( $url )
     {
+        $this->doAction( self::ON_BEFORE_REDIRECT_ACTION );
+        
         $location = $this->filter( self::ON_REDIRECT_LOCATION_FILTER, $url );
         
         header( 'Location: ' . $location );
@@ -120,10 +128,12 @@ abstract class Controller extends Component implements IController
     }
     
     // actions
-    const ON_INIT_ACTION                = 'on_init_action';
-    const ON_BEFORE_CONTROLLER_RUN      = 'on_before_controller_run';
-    const ON_AFTER_CONTROLLER_RUN       = 'on_after_controller_run';
+    const ON_INIT_ACTION_ACTION             = 'on_init_action';
+    const ON_BEFORE_CONTROLLER_RUN_ACTION   = 'on_before_controller_run_action';
+    const ON_AFTER_CONTROLLER_RUN_ACTION    = 'on_after_controller_run_action';
+    const ON_BEFORE_REDIRECT_ACTION         = 'on_before_redirect_action';
     
     // filters
-    const ON_REDIRECT_LOCATION_FILTER   = 'on_redirect_filter';
+    const ON_INIT_ACTION_FILTER             = 'on_init_action_filter';
+    const ON_REDIRECT_LOCATION_FILTER       = 'on_redirect_filter';
 }

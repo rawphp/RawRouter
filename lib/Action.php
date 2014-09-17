@@ -70,6 +70,8 @@ class Action extends Component implements IAction
      * Initialises the action.
      * 
      * @param array $params configuration array
+     * 
+     * @action ON_INIT_ACTION
      */
     private function _init( $params )
     {
@@ -82,35 +84,53 @@ class Action extends Component implements IAction
                 $this->_params[] = $value;
             }
         }
+        
+        $this->doAction( self::ON_INIT_ACTION );
     }
     
     /**
      * Checks if this action has any parameters.
      * 
+     * @filter ON_HAS_PARAMS_FILTER(1)
+     * 
      * @return bool TRUE if parameters exist, else FALSE
      */
-    public function hasParams()
+    public function hasParams( )
     {
-        return ( 0 < count( $this->_params ) );
+        $result = ( 0 < count( $this->_params ) );
+        
+        return $this->filter( self::ON_HAS_PARAMS_FILTER, $result );
     }
     
     /**
      * Returns the action parameters.
      * 
+     * @filter ON_GET_PARAMS_FILTER(1)
+     * 
      * @return array the parameters (if any)
      */
-    public function getParams()
+    public function getParams( )
     {
-        return $this->_params;
+        return $this->filter( self::ON_GET_PARAMS_FILTER, $this->_params );
     }
     
     /**
      * Returns the name of the action.
      * 
+     * @filter ON_GET_NAME_FILTER(1)
+     * 
      * @return string the action name
      */
-    public function getName()
+    public function getName( )
     {
-        return $this->_name;
+        return $this->filter( self::ON_GET_NAME_FILTER, $this->_name );
     }
+    
+    // actions
+    const ON_INIT_ACTION        = 'on_init_action';
+    
+    // filters
+    const ON_HAS_PARAMS_FILTER  = 'on_has_params_filter';
+    const ON_GET_PARAMS_FILTER  = 'on_get_params_filter';
+    const ON_GET_NAME_FILTER    = 'on_get_name_fitler';
 }

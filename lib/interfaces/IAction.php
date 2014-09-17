@@ -50,6 +50,8 @@ interface IAction
     /**
      * Checks if this action has any parameters.
      * 
+     * @filter ON_HAS_PARAMS_FILTER(1)
+     * 
      * @return bool TRUE if parameters exist, else FALSE
      */
     public function hasParams();
@@ -57,12 +59,16 @@ interface IAction
     /**
      * Returns the action parameters.
      * 
+     * @filter ON_GET_PARAMS_FILTER(1)
+     * 
      * @return array the parameters (if any)
      */
     public function getParams();
     
     /**
      * Returns the name of the action.
+     * 
+     * @filter ON_GET_NAME_FILTER(1)
      * 
      * @return string the action name
      */

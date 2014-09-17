@@ -66,5 +66,4 @@ interface IRouter
      * @return Controller instance of a controller
      */
     public function createController( $route, $params );
-    
 }

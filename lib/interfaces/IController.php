@@ -48,14 +48,21 @@ namespace RawPHP\RawRouter;
 interface IController
 {
     /**
-     * Initialises the controller.
+     * Sets the controller action.
      * 
      * @param IAction $action the action instance
+     * 
+     * @filter ON_INIT_ACTION_FILTER(1)
+     * 
+     * @action ON_INIT_ACTION
      */
-    public function init( $action );
+    public function setAction( IAction $action );
     
     /**
      * Runs the controller action.
+     * 
+     * @action ON_BEFORE_CONTROLLER_RUN_ACTION
+     * @action ON_AFTER_CONTROLLER_RUN_ACTION
      */
     public function run( );
     
@@ -63,6 +70,10 @@ interface IController
      * Redirects the browser to new location.
      * 
      * @param string $url the redirection url
+     * 
+     * @action ON_BEFORE_REDIRECT_ACTION
+     * 
+     * @filter ON_REDIRECT_LOCATION_FILTER
      */
     public function redirect( $url );
 }

@@ -74,6 +74,8 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 
 #### 17-09-2014
 - Updated to work with the latest rawphp/rawbase package.
+- Added extra hooks to Action.
+- Removed the constructor added new `setAction( IAction )` method on Controller.
 
 #### 14-09-2014
 - Implemented the hook system.
