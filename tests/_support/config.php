@@ -45,4 +45,7 @@ $config[ 'default_controller' ] = 'home';
 $config[ 'default_action' ]     = 'index';
 $config[ 'namespace' ]          = 'RawPHP\\RawRouter\\Tests\\';
 
+$config[ 'debug' ] = TRUE;
+
+
 return $config;

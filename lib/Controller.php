@@ -63,12 +63,14 @@ abstract class Controller extends Component implements IController
     public $pageView            = '';
     
     /**
-     * Constructs the controller and attaches callbacks for the
+     * Initialises the controller and attaches callbacks for the
      * ON_BEFORE_CONTROLLER_RUN_ACTION and ON_AFTER_CONTROLLER_RUN_ACTION
      * actions.
      */
-    public function __construct( )
+    public function init( $config = NULL )
     {
+        parent::init( $config );
+        
         $this->addAction( self::ON_BEFORE_CONTROLLER_RUN_ACTION, array( $this, 'onBeforeAction' ) );
         $this->addAction( self::ON_AFTER_CONTROLLER_RUN_ACTION, array( $this, 'onAfterAction' ) );
     }

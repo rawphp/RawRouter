@@ -68,9 +68,12 @@ class LEControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstantiatingController( )
     {
+        global $config;
+        
         $action = new Action( 'indexAction' );
         
         $controller = new HomeController( );
+        $controller->init( $config );
         $controller->setAction( $action );
         
         $this->assertNotNull( $controller );
@@ -81,9 +84,12 @@ class LEControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadingEnglishHomePage( )
     {
+        global $config;
+        
         $action = new Action( 'english' );
         
         $this->controller = new LangController( );
+        $this->controller->init( $config );
         $this->controller->setAction( $action );
         
         $this->setControllerFilters( );

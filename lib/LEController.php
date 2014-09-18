@@ -57,15 +57,15 @@ abstract class LEController extends Controller implements ILanguageController
     public $language                    = array( );
     
     /**
-     * Constructor for LE (language-enabled) Controller.
+     * Initialises for LE (language-enabled) Controller.
      * 
-     * This constructor hooks into the Controller::ON_LOAD_EXTRA_DATA_FILTER
+     * This method hooks into the Controller::ON_LOAD_EXTRA_DATA_FILTER
      * hook to be able to extract language translations in the $e (extra)
      * variable.
      */
-    public function __construct()
+    public function init( $config = NULL )
     {
-        parent::__construct();
+        parent::init( $config );
         
         $this->addFilter( self::ON_LOAD_EXTRA_DATA_FILTER, 
                 array( $this, 'loadLanguageCallback' ) );

@@ -58,18 +58,21 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Setup before each test.
      */
-    protected function setUp()
+    protected function setUp( )
     {
+        global $config;
+        
         $action = new Action( 'indexAction' );
         
         $this->controller = new HomeController( );
+        $this->controller->init( $config );
         $this->controller->setAction( $action );
     }
     
     /**
      * Cleanup after each test.
      */
-    protected function tearDown()
+    protected function tearDown( )
     {
         $this->controller = NULL;
     }
@@ -100,15 +103,15 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Helper method to pass the views directory to the controller.
      * 
-     * @param string $dir the directory that is always NULL
+     * @param string $viewsDir the directory that is always NULL
      * 
      * @return string the path to the views directory
      */
-    public function getViewDirCallback( $dir )
+    public function getViewDirCallback( $viewsDir )
     {
-        $dir = VIEWS_DIR;
+        $viewsDir = VIEWS_DIR;
         
-        return $dir;
+        return $viewsDir;
     }
     
     /**
