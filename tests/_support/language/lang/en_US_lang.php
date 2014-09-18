@@ -23,6 +23,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * 
+ * PHP version 5.4
+ * 
  * @category  PHP
  * @package   RawPHP/RawRouter
  * @author    Tom Kaczohca <tom@rawphp.org>
@@ -31,16 +33,10 @@
  * @link      http://rawphp.org/
  */
 
-defined( 'DS' )                 || define( 'DS', DIRECTORY_SEPARATOR );
-defined( 'SUPPORT_DIR' )        || define( 'SUPPORT_DIR', dirname( __FILE__ ) . DS . '_support' . DS );
-defined( 'CONTROLLERS_DIR' )    || define( 'CONTROLLERS_DIR', SUPPORT_DIR . 'controllers' . DS );
-defined( 'VIEWS_DIR' )          || define( 'VIEWS_DIR', SUPPORT_DIR . 'views' . DS );
-defined( 'LANGUAGE_DIR' )       || define( 'LANGUAGE_DIR', SUPPORT_DIR . 'language' . DS );
+$lang = array();
 
-$config = include_once SUPPORT_DIR . 'config.php';
+$lang[ 'title' ]                = 'Welcome to RawPHP';
+$lang[ 'text' ]                 = 'You will absolutely love RawPHP!!!';
 
-require_once dirname( dirname( __FILE__ ) ) . DS . 'vendor' . DS . 'autoload.php';
-require_once CONTROLLERS_DIR . 'HomeController.php';
-require_once CONTROLLERS_DIR . 'LangController.php';
 
-echo PHP_EOL . PHP_EOL . '************* BOOTSTRAP ********************' . PHP_EOL . PHP_EOL;
+return $lang;

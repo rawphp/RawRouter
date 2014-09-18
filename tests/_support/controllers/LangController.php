@@ -35,10 +35,10 @@
 
 namespace RawPHP\RawRouter\Tests;
 
-use RawPHP\RawRouter\Controller;
+use RawPHP\RawRouter\LEController;
 
 /**
- * Test Home Controller.
+ * Test Language Controller example.
  * 
  * @category  PHP
  * @package   RawPHP/RawRouter/Tests
@@ -47,26 +47,37 @@ use RawPHP\RawRouter\Controller;
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-class HomeController extends Controller
+class LangController extends LEController
 {
     /**
      * Default action: index
      */
-    public function indexAction()
+    public function indexAction( )
     {
+        echo 'welcome to lang/index';
     }
     
     /**
-     * Example action: About.
+     * The english version of the home page.
      */
-    public function aboutAction( )
+    public function englishAction( )
     {
+        $this->loadLanguage( 'lang', 'en_US' );
+        
+        $this->loadView( array(
+            'view'  => 'lang/index',
+        ) );
     }
     
     /**
-     * Example action: Pages
+     * The french version of the home page.
      */
-    public function pagesAction( )
+    public function frenchAction( )
     {
+        $this->loadLanguage( 'lang', 'fr_FR' );
+        
+        $this->loadView( array(
+            'view'  => 'lang/index',
+        ) );
     }
 }

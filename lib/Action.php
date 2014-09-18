@@ -61,6 +61,11 @@ class Action extends Component implements IAction
      */
     public function __construct( $name, $params = NULL )
     {
+        if ( FALSE === strstr( $name, 'Action' ) )
+        {
+            $name = $name . 'Action';
+        }
+        
         $this->_name = str_replace( '.php', '', $name );
         
         $this->_init( $params );

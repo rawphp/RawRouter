@@ -36,7 +36,7 @@
 namespace RawPHP\RawRouter;
 
 /**
- * The base controller interface.
+ * The language controller interface.
  * 
  * @category  PHP
  * @package   RawPHP/RawRouter
@@ -45,53 +45,33 @@ namespace RawPHP\RawRouter;
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-interface IController
+interface ILanguageController
 {
     /**
-     * Sets the controller action.
+     * Loads a language file for a controller.
      * 
-     * @param IAction $action the action instance
+     * This method requires that LEController::ON_GET_LANG_DIR_FILTER hook has
+     * a valid callback that sets the language directory for the controller.
      * 
-     * @filter ON_INIT_ACTION_FILTER(1)
+     * It also requires that LEController::ON_GET_DEFAULT_LANG_FILTER hook has
+     * a valid callback that sets the default language to be used if the requested
+     * language file is not found.
      * 
-     * @action ON_INIT_ACTION
+     * @param type $controller the controller name
+     * @param type $language   the language to load
+     * @param bool $return     whether to return the translations or to send them
+     *                         to the view
+     * 
+     * @filter ON_GET_LANG_DIR_FILTER(4)
+     * @filter ON_GET_DEFAULT_LANG_FILTER(4)
+     * 
+     * @action ON_LOAD_LANG_ACTION
+     * 
+     * @filter ON_LOAD_LANG_FILTER(4)
+     * 
+     * @return array returns the language array
+     * 
+     * @throws RawException if there is something wrong with loading the language
      */
-    public function setAction( IAction $action );
-    
-    /**
-     * Runs the controller action.
-     * 
-     * @action ON_BEFORE_CONTROLLER_RUN_ACTION
-     * @action ON_AFTER_CONTROLLER_RUN_ACTION
-     */
-    public function run( );
-    
-    /**
-     * Loads a view file.
-     * 
-     * This method requires Controller::ON_GET_VIEWS_DIR_FILTER to have
-     * a valid callback assigned to the path of the view files.
-     * 
-     * @param array $data   data to make available to the views as variables
-     * @param bool  $return whether to return the view to the calling method
-     * 
-     * @fitler ON_GET_VIEWS_DIR_FILTER(3)
-     * @filter ON_LOAD_VIEW_FILTER(3)
-     * 
-     * @return mixed view html string on success, FALSE on error
-     * 
-     * @throws RawException if there is something wrong.
-     */
-    public function loadView( $data = array( ), $return = FALSE );
-    
-    /**
-     * Redirects the browser to new location.
-     * 
-     * @param string $url the redirection url
-     * 
-     * @action ON_BEFORE_REDIRECT_ACTION
-     * 
-     * @filter ON_REDIRECT_LOCATION_FILTER
-     */
-    public function redirect( $url );
+    public function loadLanguage( $controller, $language = 'en_US', $return = FALSE );
 }

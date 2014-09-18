@@ -23,24 +23,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * 
+ * PHP version 5.4
+ * 
  * @category  PHP
- * @package   RawPHP/RawRouter
+ * @package   RawPHP/RawRouter/Tests
  * @author    Tom Kaczohca <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-defined( 'DS' )                 || define( 'DS', DIRECTORY_SEPARATOR );
-defined( 'SUPPORT_DIR' )        || define( 'SUPPORT_DIR', dirname( __FILE__ ) . DS . '_support' . DS );
-defined( 'CONTROLLERS_DIR' )    || define( 'CONTROLLERS_DIR', SUPPORT_DIR . 'controllers' . DS );
-defined( 'VIEWS_DIR' )          || define( 'VIEWS_DIR', SUPPORT_DIR . 'views' . DS );
-defined( 'LANGUAGE_DIR' )       || define( 'LANGUAGE_DIR', SUPPORT_DIR . 'language' . DS );
+namespace RawPHP\RawRouter\Tests;
 
-$config = include_once SUPPORT_DIR . 'config.php';
+use RawPHP\RawRouter\Controller;
 
-require_once dirname( dirname( __FILE__ ) ) . DS . 'vendor' . DS . 'autoload.php';
-require_once CONTROLLERS_DIR . 'HomeController.php';
-require_once CONTROLLERS_DIR . 'LangController.php';
-
-echo PHP_EOL . PHP_EOL . '************* BOOTSTRAP ********************' . PHP_EOL . PHP_EOL;
+/**
+ * Test Home Controller.
+ * 
+ * @category  PHP
+ * @package   RawPHP/RawRouter/Tests
+ * @author    Tom Kaczohca <tom@rawphp.org>
+ * @copyright 2014 Tom Kaczocha
+ * @license   http://rawphp.org/license.txt MIT
+ * @link      http://rawphp.org/
+ */
+class HomeController extends Controller
+{
+    /**
+     * Default action: index
+     */
+    public function indexAction( )
+    {
+        $this->loadView( array(
+            'view'  => 'home/index',
+            'title' => 'Welcome to RawPHP',
+            'text'  => 'You will absolutely love RawPHP!!!',
+        ) );
+    }
+    
+    /**
+     * Example action: About.
+     */
+    public function aboutAction( )
+    {
+    }
+    
+    /**
+     * Example action: Pages
+     */
+    public function pagesAction( )
+    {
+    }
+}
