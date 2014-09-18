@@ -75,6 +75,7 @@ Please submit bug reports, suggestions and pull requests to the [GitHub issue tr
 #### 18-09-2014
 - Added `loadView()` method to Controller which can load html templates
 - Added LEController that extends Controller and provides languages features. It can load different language translations required for use in html templates.
+- Updated to work with the latest rawphp/rawbase package.
 
 #### 17-09-2014
 - Updated to work with the latest rawphp/rawbase package.
