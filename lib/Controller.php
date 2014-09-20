@@ -66,6 +66,8 @@ abstract class Controller extends Component implements IController
      * Initialises the controller and attaches callbacks for the
      * ON_BEFORE_CONTROLLER_RUN_ACTION and ON_AFTER_CONTROLLER_RUN_ACTION
      * actions.
+     * 
+     * @param array $config configuration array
      */
     public function init( $config = NULL )
     {

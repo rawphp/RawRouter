@@ -31,16 +31,20 @@
  * @link      http://rawphp.org/
  */
 
+use RawPHP\RawYaml\Yaml;
+
 defined( 'DS' )                 || define( 'DS', DIRECTORY_SEPARATOR );
 defined( 'SUPPORT_DIR' )        || define( 'SUPPORT_DIR', dirname( __FILE__ ) . DS . '_support' . DS );
 defined( 'CONTROLLERS_DIR' )    || define( 'CONTROLLERS_DIR', SUPPORT_DIR . 'controllers' . DS );
 defined( 'VIEWS_DIR' )          || define( 'VIEWS_DIR', SUPPORT_DIR . 'views' . DS );
 defined( 'LANGUAGE_DIR' )       || define( 'LANGUAGE_DIR', SUPPORT_DIR . 'language' . DS );
 
-$config = include_once SUPPORT_DIR . 'config.php';
-
 require_once dirname( dirname( __FILE__ ) ) . DS . 'vendor' . DS . 'autoload.php';
+
+$config = ( new Yaml( ) )->load( SUPPORT_DIR . 'config.yml' );
+
 require_once CONTROLLERS_DIR . 'HomeController.php';
 require_once CONTROLLERS_DIR . 'LangController.php';
+require_once CONTROLLERS_DIR . 'UsersController.php';
 
 echo PHP_EOL . PHP_EOL . '************* BOOTSTRAP ********************' . PHP_EOL . PHP_EOL;

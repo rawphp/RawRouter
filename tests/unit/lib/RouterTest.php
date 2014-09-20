@@ -150,6 +150,20 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Test creating a users controller with default action.
+     */
+    public function testCreateUsersControllerWithDefaultAction( )
+    {
+        $route = 'users';
+        
+        $controller = $this->router->createController( $route, array( ) );
+        
+        $this->assertNotNull( $controller );
+        $this->assertInstanceOf( $this->router->namespace . 'UsersController', $controller );
+        $this->assertNotNull( $controller->action );
+    }
+    
+    /**
      * Helper method to test create controller.
      * 
      * @param RawController $controller the controller to test

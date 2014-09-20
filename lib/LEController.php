@@ -62,6 +62,8 @@ abstract class LEController extends Controller implements ILanguageController
      * This method hooks into the Controller::ON_LOAD_EXTRA_DATA_FILTER
      * hook to be able to extract language translations in the $e (extra)
      * variable.
+     * 
+     * @param array $config configuration array
      */
     public function init( $config = NULL )
     {

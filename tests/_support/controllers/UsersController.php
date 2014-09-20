@@ -26,26 +26,42 @@
  * PHP version 5.4
  * 
  * @category  PHP
- * @package   RawPHP/RawSession
+ * @package   RawPHP/RawRouter/Tests
  * @author    Tom Kaczohca <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-$config = array();
+namespace RawPHP\RawRouter\Tests;
 
-/*******************************************************************************
- * Router
- * -----------------------------------------------------------------------------
- * These are the router settings.
+use RawPHP\RawRouter\Controller;
+
+/**
+ * Test Users Controller.
  * 
- ******************************************************************************/
-$config[ 'default_controller' ] = 'home';
-$config[ 'default_action' ]     = 'index';
-$config[ 'namespace' ]          = 'RawPHP\\RawRouter\\Tests\\';
-
-$config[ 'debug' ] = TRUE;
-
-
-return $config;
+ * @category  PHP
+ * @package   RawPHP/RawRouter/Tests
+ * @author    Tom Kaczohca <tom@rawphp.org>
+ * @copyright 2014 Tom Kaczocha
+ * @license   http://rawphp.org/license.txt MIT
+ * @link      http://rawphp.org/
+ */
+class UsersController extends Controller
+{
+    /**
+     * Default user index action.
+     */
+    public function indexAction( )
+    {
+        echo 'Users Index';
+    }
+    
+    /**
+     * User login action
+     */
+    public function loginAction( )
+    {
+        echo 'User Login';
+    }
+}
