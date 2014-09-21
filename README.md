@@ -1,6 +1,8 @@
-# RawRouter - A Simple Routing Service for MVC PHP Applications [![Build Status](https://travis-ci.org/rawphp/RawRouter.svg?branch=master)](https://travis-ci.org/rawphp/RawRouter)
+# RawRouter - A Simple Routing Service for MVC PHP Applications
 
-[![Latest Stable Version](https://poser.pugx.org/rawphp/raw-router/v/stable.svg)](https://packagist.org/packages/rawphp/raw-router) [![Total Downloads](https://poser.pugx.org/rawphp/raw-router/downloads.svg)](https://packagist.org/packages/rawphp/raw-router) [![Latest Unstable Version](https://poser.pugx.org/rawphp/raw-router/v/unstable.svg)](https://packagist.org/packages/rawphp/raw-router) [![License](https://poser.pugx.org/rawphp/raw-router/license.svg)](https://packagist.org/packages/rawphp/raw-router)
+[![Build Status](https://travis-ci.org/rawphp/RawRouter.svg?branch=master)](https://travis-ci.org/rawphp/RawRouter) [![Coverage Status](https://coveralls.io/repos/rawphp/RawRouter/badge.png)](https://coveralls.io/r/rawphp/RawRouter)
+[![Latest Stable Version](https://poser.pugx.org/rawphp/raw-router/v/stable.svg)](https://packagist.org/packages/rawphp/raw-router) [![Total Downloads](https://poser.pugx.org/rawphp/raw-router/downloads.svg)](https://packagist.org/packages/rawphp/raw-router) 
+[![Latest Unstable Version](https://poser.pugx.org/rawphp/raw-router/v/unstable.svg)](https://packagist.org/packages/rawphp/raw-router) [![License](https://poser.pugx.org/rawphp/raw-router/license.svg)](https://packagist.org/packages/rawphp/raw-router)
 
 ## Package Features
 - Simple to use router
