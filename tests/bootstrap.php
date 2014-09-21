@@ -23,6 +23,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * 
+ * PHP version 5.3
+ * 
  * @category  PHP
  * @package   RawPHP/RawRouter
  * @author    Tom Kaczohca <tom@rawphp.org>
@@ -41,7 +43,8 @@ defined( 'LANGUAGE_DIR' )       || define( 'LANGUAGE_DIR', SUPPORT_DIR . 'langua
 
 require_once dirname( dirname( __FILE__ ) ) . DS . 'vendor' . DS . 'autoload.php';
 
-$config = ( new Yaml( ) )->load( SUPPORT_DIR . 'config.yml' );
+$yaml = new Yaml( );
+$config = $yaml->load( SUPPORT_DIR . 'config.yml' );
 
 require_once CONTROLLERS_DIR . 'HomeController.php';
 require_once CONTROLLERS_DIR . 'LangController.php';
