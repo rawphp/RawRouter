@@ -38,7 +38,7 @@ namespace RawPHP\RawRouter;
 use RawPHP\RawRouter\IController;
 use RawPHP\RawBase\Component;
 use RawPHP\RawRouter\IAction;
-use RawPHP\RawBase\RawException;
+use RawPHP\RawBase\Exceptions\RawException;
 
 /**
  * Base controller class which all other controllers in the application
