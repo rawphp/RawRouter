@@ -4,6 +4,8 @@
 [![Latest Stable Version](https://poser.pugx.org/rawphp/raw-router/v/stable.svg)](https://packagist.org/packages/rawphp/raw-router) [![Total Downloads](https://poser.pugx.org/rawphp/raw-router/downloads.svg)](https://packagist.org/packages/rawphp/raw-router) 
 [![Latest Unstable Version](https://poser.pugx.org/rawphp/raw-router/v/unstable.svg)](https://packagist.org/packages/rawphp/raw-router) [![License](https://poser.pugx.org/rawphp/raw-router/license.svg)](https://packagist.org/packages/rawphp/raw-router)
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/eef462a6-5f5c-4f19-ab93-f5b49bcf1117/big.png)](https://insight.sensiolabs.com/projects/eef462a6-5f5c-4f19-ab93-f5b49bcf1117)
+
 ## Package Features
 - Simple to use router
 - MVC style routing
