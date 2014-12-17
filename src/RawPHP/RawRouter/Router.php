@@ -26,8 +26,8 @@
  * PHP version 5.3
  *
  * @category  PHP
- * @package   RawPHP/RawRouter
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
@@ -35,66 +35,71 @@
 
 namespace RawPHP\RawRouter;
 
-use RawPHP\RawRouter\IRouter;
-use RawPHP\RawRouter\Action;
-use RawPHP\RawBase\Component;
+use RawPHP\RawDispatcher\Contract\IDispatcher;
+use RawPHP\RawRouter\Contract\IController;
+use RawPHP\RawRouter\Contract\IRouter;
 
 /**
  * The Routing class.
  *
  * @category  PHP
- * @package   RawPHP/RawRouter
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-class Router extends Component implements IRouter
+class Router implements IRouter
 {
-    public $defaultController   = 'home';
-    public $defaultAction       = 'index';
-    public $namespace           = '';
+    public $defaultController = 'home';
+    public $defaultAction = 'index';
+    /** @var  array */
+    protected $namespaces = [ ];
+    /** @var  array */
+    protected $config;
+    /** @var  IDispatcher */
+    protected $dispatcher;
+
+    /**
+     * Create new router.
+     *
+     * @param array $config
+     */
+    public function __construct( array $config = [ ] )
+    {
+        $this->config = $config;
+
+        $this->init( $config );
+    }
 
     /**
      * Initialises the router.
      *
      * @param array $config configuration array
-     *
-     * @action ON_BEFORE_ROUTER_INIT
-     * @action ON_AFTER_ROUTER_INIT
      */
-    public function init( $config = NULL )
+    public function init( array $config = [ ] )
     {
-        parent::init( $config );
-
-        $this->doAction( self::ON_BEFORE_ROUTER_INIT );
-
-        if ( NULL !== $config  && is_array( $config ) )
+        foreach ( $config as $key => $value )
         {
-            foreach( $config as $key => $value )
+            switch ( $key )
             {
-                switch( $key )
-                {
-                    case 'default_controller':
-                        $this->defaultController = $value;
-                        break;
+                case 'default_controller':
+                    $this->defaultController = $value;
+                    break;
 
-                    case 'default_action':
-                        $this->defaultAction = $value;
-                        break;
+                case 'default_action':
+                    $this->defaultAction = $value;
+                    break;
 
-                    case 'namespace':
-                        $this->namespace = $value;
-                        break;
+                case 'namespaces':
+                    $this->namespaces = $value;
+                    break;
 
-                    default:
-                        // do nothing
-                        break;
-                }
+                default:
+                    // do nothing
+                    break;
             }
         }
-
-        $this->doAction( self::ON_AFTER_ROUTER_INIT );
     }
 
     /**
@@ -102,18 +107,15 @@ class Router extends Component implements IRouter
      *
      * @param string $route  the controller/action string
      *                       format [controllerName/actionName]
-     *
      * @param array  $params list of parameters
-     *
-     * @filter ON_CREATE_CONTROLLER_FILTER
      *
      * @return Controller instance of a controller
      */
     public function createController( $route, $params )
     {
         $control = NULL;
-        $route = ltrim( $route, '/' );
-        $route = rtrim( $route, '/' );
+        $route   = ltrim( $route, '/' );
+        $route   = rtrim( $route, '/' );
 
         $vars = explode( '/', $route );
 
@@ -123,8 +125,6 @@ class Router extends Component implements IRouter
 
             // build action
             $aName = $this->_buildActionName( $control, $this->defaultAction );
-
-            $control = $this->namespace . $control;
         }
         else if ( 1 === count( $vars ) )
         {
@@ -136,8 +136,6 @@ class Router extends Component implements IRouter
 
             // build action
             $aName = $this->_buildActionName( $control, $this->defaultAction );
-
-            $control = $this->namespace . $control;
         }
         else if ( 2 === count( $vars ) )
         {
@@ -148,8 +146,6 @@ class Router extends Component implements IRouter
 
             // build action
             $aName = $this->_buildActionName( $control, $vars[ 0 ] );
-
-            $control = $this->namespace . $control;
         }
         else if ( 2 < count( $vars ) )
         {
@@ -162,8 +158,6 @@ class Router extends Component implements IRouter
             $aName = $this->_buildActionName( $control, $vars[ 0 ] );
 
             array_shift( $vars );
-
-            $control = $this->namespace . $control;
         }
         else
         {
@@ -174,10 +168,13 @@ class Router extends Component implements IRouter
 
         $action = new Action( $aName, $params );
 
+        /** @var IController $controller */
         $controller = new $control( $this->config );
         $controller->setAction( $action );
+        $controller->setDispatcher( $this->dispatcher );
+        $controller->addDefaultListeners();
 
-        return $this->filter( self::ON_CREATE_CONTROLLER_FILTER, $controller, $route, $params );
+        return $controller;
     }
 
     /**
@@ -193,7 +190,20 @@ class Router extends Component implements IRouter
 
         $controller = $name;
 
-        if ( !class_exists( $this->namespace . $controller ) )
+        $namespace = NULL;
+
+        foreach ( $this->namespaces as $ns )
+        {
+            if ( class_exists( $ns . $controller ) )
+            {
+                $namespace  = $ns;
+                $controller = $ns . $controller;
+
+                break;
+            }
+        }
+
+        if ( NULL === $namespace )
         {
             return strtoupper( $this->defaultController[ 0 ] )
             . substr( $this->defaultController, 1 ) . 'Controller';
@@ -216,7 +226,7 @@ class Router extends Component implements IRouter
     {
         $actionName = $actionName . 'Action';
 
-        if ( !method_exists( $this->namespace . $controllerName, $actionName ) )
+        if ( !method_exists( $controllerName, $actionName ) )
         {
             $actionName = $this->defaultAction . 'Action';
         }
@@ -224,8 +234,43 @@ class Router extends Component implements IRouter
         return $actionName;
     }
 
-    const ON_BEFORE_ROUTER_INIT         = 'on_before_router_init';
-    const ON_AFTER_ROUTER_INIT          = 'on_after_router_init';
+    /**
+     * Set the event dispatcher.
+     *
+     * @param IDispatcher $dispatcher
+     */
+    public function setDispatcher( IDispatcher $dispatcher )
+    {
+        $this->dispatcher = $dispatcher;
+    }
 
-    const ON_CREATE_CONTROLLER_FILTER   = 'on_create_controller_filter';
+    /**
+     * Get the event dispatcher.
+     *
+     * @return IDispatcher
+     */
+    public function getDispatcher()
+    {
+        return $this->dispatcher;
+    }
+
+    /**
+     * Get the controller namespace.
+     *
+     * @return array
+     */
+    public function getNamespaces()
+    {
+        return $this->namespaces;
+    }
+
+    /**
+     * Set the controller namespace.
+     *
+     * @param array $namespaces
+     */
+    public function setNamespaces( array $namespaces )
+    {
+        $this->namespaces = $namespaces;
+    }
 }

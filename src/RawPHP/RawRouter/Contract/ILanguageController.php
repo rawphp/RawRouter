@@ -26,58 +26,52 @@
  * PHP version 5.3
  * 
  * @category  PHP
- * @package   RawPHP/RawRouter/Tests
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter\Contract
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-namespace RawPHP\RawRouter\Tests;
-
-use RawPHP\RawRouter\LEController;
+namespace RawPHP\RawRouter\Contract;
 
 /**
- * Test Language Controller example.
+ * The language controller interface.
  * 
  * @category  PHP
- * @package   RawPHP/RawRouter/Tests
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter\Contract
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-class LangController extends LEController
+interface ILanguageController
 {
     /**
-     * Default action: index
+     * Loads a language file for a controller.
+     * 
+     * This method requires that LEController::ON_GET_LANG_DIR_FILTER hook has
+     * a valid callback that sets the language directory for the controller.
+     * 
+     * It also requires that LEController::ON_GET_DEFAULT_LANG_FILTER hook has
+     * a valid callback that sets the default language to be used if the requested
+     * language file is not found.
+     * 
+     * @param type $controller the controller name
+     * @param type $language   the language to load
+     * @param bool $return     whether to return the translations or to send them
+     *                         to the view
+     * 
+     * @filter ON_GET_LANG_DIR_FILTER(4)
+     * @filter ON_GET_DEFAULT_LANG_FILTER(4)
+     * 
+     * @action ON_LOAD_LANG_ACTION
+     * 
+     * @filter ON_LOAD_LANG_FILTER(4)
+     * 
+     * @return array returns the language array
+     * 
+     * @throws RawException if there is something wrong with loading the language
      */
-    public function indexAction( )
-    {
-        echo 'welcome to lang/index';
-    }
-    
-    /**
-     * The english version of the home page.
-     */
-    public function englishAction( )
-    {
-        $this->loadLanguage( 'lang', 'en_US' );
-        
-        $this->loadView( array(
-            'view'  => 'lang/index',
-        ) );
-    }
-    
-    /**
-     * The french version of the home page.
-     */
-    public function frenchAction( )
-    {
-        $this->loadLanguage( 'lang', 'fr_FR' );
-        
-        $this->loadView( array(
-            'view'  => 'lang/index',
-        ) );
-    }
+    public function loadLanguage( $controller, $language = 'en_US', $return = FALSE );
 }

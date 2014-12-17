@@ -26,8 +26,8 @@
  * PHP version 5.3
  *
  * @category  PHP
- * @package   RawPHP/RawRouter
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
@@ -35,20 +35,19 @@
 
 namespace RawPHP\RawRouter;
 
-use RawPHP\RawRouter\IAction;
-use RawPHP\RawBase\Component;
+use RawPHP\RawRouter\Contract\IAction;
 
 /**
  * This class represents a controllers action as controller/action route.
  *
  * @category  PHP
- * @package   RawPHP/RawRouter
+ * @package   RawPHP\RawRouter
  * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-class Action extends Component implements IAction
+class Action implements IAction
 {
     private $_name;
     private $_params;
@@ -61,8 +60,6 @@ class Action extends Component implements IAction
      */
     public function __construct( $name, $params = NULL )
     {
-        parent::__construct( );
-        
         if ( FALSE === strstr( $name, 'Action' ) )
         {
             $name = $name . 'Action';
@@ -77,67 +74,47 @@ class Action extends Component implements IAction
      * Initialises the action.
      *
      * @param array $params configuration array
-     *
-     * @action ON_INIT_ACTION
      */
     private function _init( $params )
     {
-        parent::init( $params );
-
         if ( NULL !== $params && 0 < count( $params ) )
         {
-            foreach( $params as $key => $value )
+            foreach ( $params as $key => $value )
             {
-                $this->_params[] = $value;
+                $this->_params[ ] = $value;
             }
         }
-
-        $this->doAction( self::ON_INIT_ACTION );
     }
 
     /**
      * Checks if this action has any parameters.
      *
-     * @filter ON_HAS_PARAMS_FILTER(1)
-     *
      * @return bool TRUE if parameters exist, else FALSE
      */
-    public function hasParams( )
+    public function hasParams()
     {
         $result = ( 0 < count( $this->_params ) );
 
-        return $this->filter( self::ON_HAS_PARAMS_FILTER, $result );
+        return $result;
     }
 
     /**
      * Returns the action parameters.
      *
-     * @filter ON_GET_PARAMS_FILTER(1)
-     *
      * @return array the parameters (if any)
      */
-    public function getParams( )
+    public function getParams()
     {
-        return $this->filter( self::ON_GET_PARAMS_FILTER, $this->_params );
+        return $this->_params;
     }
 
     /**
      * Returns the name of the action.
      *
-     * @filter ON_GET_NAME_FILTER(1)
-     *
      * @return string the action name
      */
-    public function getName( )
+    public function getName()
     {
-        return $this->filter( self::ON_GET_NAME_FILTER, $this->_name );
+        return $this->_name;
     }
-
-    // actions
-    const ON_INIT_ACTION        = 'on_init_action';
-
-    // filters
-    const ON_HAS_PARAMS_FILTER  = 'on_has_params_filter';
-    const ON_GET_PARAMS_FILTER  = 'on_get_params_filter';
-    const ON_GET_NAME_FILTER    = 'on_get_name_fitler';
 }

@@ -26,52 +26,52 @@
  * PHP version 5.3
  * 
  * @category  PHP
- * @package   RawPHP/RawRouter
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter\Support\Controller
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-namespace RawPHP\RawRouter;
+namespace RawPHP\RawRouter\Support\Controller;
+
+use RawPHP\RawRouter\Controller;
 
 /**
- * The language controller interface.
+ * Test Home Controller.
  * 
  * @category  PHP
- * @package   RawPHP/RawRouter
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter\Support\Controller
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-interface ILanguageController
+class HomeController extends Controller
 {
     /**
-     * Loads a language file for a controller.
-     * 
-     * This method requires that LEController::ON_GET_LANG_DIR_FILTER hook has
-     * a valid callback that sets the language directory for the controller.
-     * 
-     * It also requires that LEController::ON_GET_DEFAULT_LANG_FILTER hook has
-     * a valid callback that sets the default language to be used if the requested
-     * language file is not found.
-     * 
-     * @param type $controller the controller name
-     * @param type $language   the language to load
-     * @param bool $return     whether to return the translations or to send them
-     *                         to the view
-     * 
-     * @filter ON_GET_LANG_DIR_FILTER(4)
-     * @filter ON_GET_DEFAULT_LANG_FILTER(4)
-     * 
-     * @action ON_LOAD_LANG_ACTION
-     * 
-     * @filter ON_LOAD_LANG_FILTER(4)
-     * 
-     * @return array returns the language array
-     * 
-     * @throws RawException if there is something wrong with loading the language
+     * Default action: index
      */
-    public function loadLanguage( $controller, $language = 'en_US', $return = FALSE );
+    public function indexAction( )
+    {
+        $this->loadView( [
+            'view'  => 'home/index',
+            'title' => 'Welcome to RawPHP',
+            'text'  => 'You will absolutely love RawPHP!!!',
+        ] );
+    }
+    
+    /**
+     * Example action: About.
+     */
+    public function aboutAction( )
+    {
+    }
+    
+    /**
+     * Example action: Pages
+     */
+    public function pagesAction( )
+    {
+    }
 }

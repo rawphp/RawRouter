@@ -26,72 +26,58 @@
  * PHP version 5.3
  * 
  * @category  PHP
- * @package   RawPHP/RawRouter
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter\Support\Controller
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-namespace RawPHP\RawRouter;
+namespace RawPHP\RawRouter\Support\Controller;
+
+use RawPHP\RawRouter\LEController;
 
 /**
- * The base controller interface.
+ * Test Language Controller example.
  * 
  * @category  PHP
- * @package   RawPHP/RawRouter
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter\Support\Controller
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-interface IController
+class LangController extends LEController
 {
     /**
-     * Sets the controller action.
-     * 
-     * @param IAction $action the action instance
-     * 
-     * @filter ON_INIT_ACTION_FILTER(1)
-     * 
-     * @action ON_INIT_ACTION
+     * Default action: index
      */
-    public function setAction( IAction $action );
+    public function indexAction( )
+    {
+        echo 'welcome to lang/index';
+    }
     
     /**
-     * Runs the controller action.
-     * 
-     * @action ON_BEFORE_CONTROLLER_RUN_ACTION
-     * @action ON_AFTER_CONTROLLER_RUN_ACTION
+     * The english version of the home page.
      */
-    public function run( );
+    public function englishAction( )
+    {
+        $this->loadLanguage( 'lang', 'en_US' );
+        
+        $this->loadView( array(
+            'view'  => 'lang/index',
+        ) );
+    }
     
     /**
-     * Loads a view file.
-     * 
-     * This method requires Controller::ON_GET_VIEWS_DIR_FILTER to have
-     * a valid callback assigned to the path of the view files.
-     * 
-     * @param array $data   data to make available to the views as variables
-     * @param bool  $return whether to return the view to the calling method
-     * 
-     * @fitler ON_GET_VIEWS_DIR_FILTER(3)
-     * @filter ON_LOAD_VIEW_FILTER(3)
-     * 
-     * @return mixed view html string on success, FALSE on error
-     * 
-     * @throws RawException if there is something wrong.
+     * The french version of the home page.
      */
-    public function loadView( $data = array( ), $return = FALSE );
-    
-    /**
-     * Redirects the browser to new location.
-     * 
-     * @param string $url the redirection url
-     * 
-     * @action ON_BEFORE_REDIRECT_ACTION
-     * 
-     * @filter ON_REDIRECT_LOCATION_FILTER
-     */
-    public function redirect( $url );
+    public function frenchAction( )
+    {
+        $this->loadLanguage( 'lang', 'fr_FR' );
+        
+        $this->loadView( array(
+            'view'  => 'lang/index',
+        ) );
+    }
 }

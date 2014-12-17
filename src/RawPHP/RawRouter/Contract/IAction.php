@@ -26,42 +26,50 @@
  * PHP version 5.3
  * 
  * @category  PHP
- * @package   RawPHP/RawRouter/Tests
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter\Contract
+ * @author    Tom Kaczocha <tom@rawphp.org>
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
 
-namespace RawPHP\RawRouter\Tests;
-
-use RawPHP\RawRouter\Controller;
+namespace RawPHP\RawRouter\Contract;
 
 /**
- * Test Users Controller.
+ * This interface represents a controllers action as controller/action route.
  * 
  * @category  PHP
- * @package   RawPHP/RawRouter/Tests
- * @author    Tom Kaczohca <tom@rawphp.org>
+ * @package   RawPHP\RawRouter\Contract
  * @copyright 2014 Tom Kaczocha
  * @license   http://rawphp.org/license.txt MIT
  * @link      http://rawphp.org/
  */
-class UsersController extends Controller
+interface IAction
 {
     /**
-     * Default user index action.
+     * Checks if this action has any parameters.
+     * 
+     * @filter ON_HAS_PARAMS_FILTER(1)
+     * 
+     * @return bool TRUE if parameters exist, else FALSE
      */
-    public function indexAction( )
-    {
-        echo 'Users Index';
-    }
+    public function hasParams();
     
     /**
-     * User login action
+     * Returns the action parameters.
+     * 
+     * @filter ON_GET_PARAMS_FILTER(1)
+     * 
+     * @return array the parameters (if any)
      */
-    public function loginAction( )
-    {
-        echo 'User Login';
-    }
+    public function getParams();
+    
+    /**
+     * Returns the name of the action.
+     * 
+     * @filter ON_GET_NAME_FILTER(1)
+     * 
+     * @return string the action name
+     */
+    public function getName();
 }
