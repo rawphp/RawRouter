@@ -51,8 +51,8 @@ use RawPHP\RawRouter\Contract\IRouter;
  */
 class Router implements IRouter
 {
-    public $defaultController = 'home';
-    public $defaultAction = 'index';
+    protected $defaultController = 'home';
+    protected $defaultAction = 'index';
     /** @var  array */
     protected $namespaces = [ ];
     /** @var  array */
@@ -272,5 +272,45 @@ class Router implements IRouter
     public function setNamespaces( array $namespaces )
     {
         $this->namespaces = $namespaces;
+    }
+
+    /**
+     * Get the default controller name.
+     *
+     * @return string
+     */
+    public function getDefaultController()
+    {
+        return $this->defaultController;
+    }
+
+    /**
+     * Set the default controller name.
+     *
+     * @param string $defaultController
+     */
+    public function setDefaultController( $defaultController )
+    {
+        $this->defaultController = $defaultController;
+    }
+
+    /**
+     * Get the default action name.
+     *
+     * @return string
+     */
+    public function getDefaultAction()
+    {
+        return $this->defaultAction;
+    }
+
+    /**
+     * Set the default action name.
+     *
+     * @param string $defaultAction
+     */
+    public function setDefaultAction( $defaultAction )
+    {
+        $this->defaultAction = $defaultAction;
     }
 }
